@@ -4,8 +4,13 @@ This is a CT denoise model.
 In reality, the projection data will have noise, so it need to design a 
 model to denoise the final reconstruction result.
 
-Base ResNet but we remove the pooling layer and change conv to depthwise conv
-(in tflearn, the depthwise conv is grouped_conv_2d).
+In our experiment, we add noise into the projection data, and then 
+use FBP algorithm to reconstruction, after that use the DWConvResNet
+to train by the reconstruction result with noise, compare with the
+clean reconstruction result.
+
+The DWConvResNet is base ResNet but we remove the pooling layer and change 
+conv to depthwise conv(in tflearn, the depthwise conv is grouped_conv_2d).
 We define a new resnet_dwconv_block like below:
      
     bn->relu->depthwiseconv->bn->relu->conv->bn->relu->depthwiseconv->bn->relu->conv
