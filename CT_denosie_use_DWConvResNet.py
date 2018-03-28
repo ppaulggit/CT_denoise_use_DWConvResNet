@@ -15,6 +15,16 @@ import math
 import tensorflow as tf
 
 
+def Channel_Shuffle(input, num_groups, reuse=False, scope=None, name='ChannelShuffle'):
+    with tf.variable_scope(scope, default_name=name, values=[input],
+                           reuse=reuse) as scope:
+        n, h, w, c = input.get_shape().as_list()
+        input_reshaped = tf.reshape(input, [-1, h, w, num_groups, c//num_groups])
+        input_transposed = tf.transpose(input_reshaped, [0, 1, 2, 4, 3])
+        output = tf.reshape(input_transposed, [-1, h, w, c])
+        return output
+
+
 def resnet_dwconv_block(input, channel_multiplier, outChannels,
                         nb, filter_size=3, regularizer='L2',
                         weights_init='variance_scaling',
@@ -38,6 +48,7 @@ def resnet_dwconv_block(input, channel_multiplier, outChannels,
                                weights_init=weights_init,
                                regularizer=regularizer,
                                weight_decay=weight_decay)
+            res_unit = Channel_Shuffle(res_unit, 8)
             res_unit = batch_normalization(res_unit)
             res_unit = relu(res_unit)
             res_unit = grouped_conv_2d(res_unit, channel_multiplier,
