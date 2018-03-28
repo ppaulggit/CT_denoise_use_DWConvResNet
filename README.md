@@ -10,10 +10,11 @@ to train by the reconstruction result with noise, compare with the
 clean reconstruction result.
 
 The DWConvResNet is base ResNet but we remove the pooling layer and change 
-conv to depthwise conv(in tflearn, the depthwise conv is grouped_conv_2d).
+conv to depthwise conv(in tflearn, the depthwise conv is grouped_conv_2d),
+and add the Channel Shuffle between two depthwise conv.
 We define a new resnet_dwconv_block like below:
      
-    bn->relu->depthwiseconv->bn->relu->conv->bn->relu->depthwiseconv->bn->relu->conv
+    bn->relu->depthwiseconv->bn->relu->conv->ChannelShuffle->bn->relu->depthwiseconv->bn->relu->conv
 
 And the network basic structure is:
 
