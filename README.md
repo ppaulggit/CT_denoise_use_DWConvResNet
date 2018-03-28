@@ -15,4 +15,5 @@ And the network basic structure is:
        resnet_dwconv_block(outputchannels=128)
        resnet_dwconv_block(outputchannels=64)
 
-The loss is begin with 7376, final loss is 20.77
+The loss is begin with 7376, final loss is 20.77. Here is the loss curve:
+![image](https://github.com/PaulGitt/CT_denoise_use_DWConvResNet/blob/master/loss.png)
