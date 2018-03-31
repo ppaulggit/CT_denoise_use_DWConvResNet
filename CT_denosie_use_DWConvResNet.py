@@ -76,7 +76,7 @@ img_size_h = 256
 num_channel = 1
 LR = 0.0001
 netname = 'DWConvResNet'
-idx = '2'
+idx = '1'
 
 MODEL_NAME = 'CT_denoise-{}-{}.model'.format(netname, idx)
 
