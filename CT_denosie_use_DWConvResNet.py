@@ -71,11 +71,11 @@ def resnet_dwconv_block(input, channel_multiplier, outChannels,
 
     return res_unit
 
-img_size_w = 180
-img_size_h = 180
+img_size_w = 256
+img_size_h = 256
 num_channel = 1
 LR = 0.0001
-netname = 'CNN012_01_6_03'
+netname = 'DWConvResNet'
 idx = '2'
 
 MODEL_NAME = 'CT_denoise-{}-{}.model'.format(netname, idx)
