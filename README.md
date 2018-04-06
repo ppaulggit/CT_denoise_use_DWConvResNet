@@ -24,8 +24,8 @@ And the network basic structure is:
        resnet_dwconv_block(outputchannels=128)
        resnet_dwconv_block(outputchannels=64)
 
-The loss is begin with 7376, final loss is 20.77. Here is the loss curve:
-![image](https://github.com/PaulGitt/CT_denoise_use_DWConvResNet/blob/master/loss.png)
+The loss is begin with 25549, final loss is 106.2. Here is the loss curve:
+![image](https://github.com/PaulGitt/CT_denoise_use_DWConvResNet/blob/master/loss_1.jpg)
 
 This model can be trained by denosie the gaussian noise, the result like this:
 The first one is the original picture, second one is add gaussian nosie, 
@@ -33,8 +33,12 @@ the third one is the reconstruction result by using DWConvResNet
 ![image](https://github.com/PaulGitt/CT_denoise_use_DWConvResNet/blob/master/result1.jpg)
 
 And alse can be trained by denoise the multi-noise(like gaussian noise, poisson nosie and salt&pepper nosie),
-result like below:
+train loss like this:
+![image](https://github.com/PaulGitt/CT_denoise_use_DWConvResNet/blob/master/loss_2.jpg)
+Loss at begin is 26390, the final loss is 20.77.
+Result like below:
 The first column is orignial picture,
 second column is add noise(first one is add poisson noise, second one is add gaussian noise, third one is add
-salt&pepper noise).
+salt&pepper noise),
+third column is the denoise picutre.
 ![image](https://github.com/PaulGitt/CT_denoise_use_DWConvResNet/blob/master/result2.jpg)
