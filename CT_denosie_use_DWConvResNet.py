@@ -42,12 +42,6 @@ def resnet_dwconv_block(input, channel_multiplier, outChannels,
                                        filter_size, weights_init=weights_init,
                                        regularizer=regularizer,
                                        weight_decay=weight_decay)
-            res_unit = batch_normalization(res_unit)
-            res_unit = relu(res_unit)
-            res_unit = conv_2d(res_unit, outChannels, 1,
-                               weights_init=weights_init,
-                               regularizer=regularizer,
-                               weight_decay=weight_decay)
             res_unit = Channel_Shuffle(res_unit, 8)
             res_unit = batch_normalization(res_unit)
             res_unit = relu(res_unit)
