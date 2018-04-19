@@ -93,36 +93,3 @@ net = conv_2d(net, 1, 3, weights_init='variance_scaling',
 net = regression(net, optimizer='adam', learning_rate=LR,
                  loss=mean_square, name='target')
 model = tflearn.DNN(net, clip_gradients=0., tensorboard_dir='log')
-
-rec_file_name = 'image_data_R_4'
-I_file_name = 'image_data_I_4'
-
-train_noise_data_file = '{}_train_{}_{}.npy'.format(rec_file_name, img_size_h, img_size_w)
-val_noise_data_file = '{}_val_{}_[].npy'.format(rec_file_name, img_size_h, img_size_w)
-target_train_data_file = '{}_train_{}_{}.npy'.format(I_file_name, img_size_h, img_size_w)
-target_val_data_file = '{}_val_{}_{}.npy'.format(I_file_name, img_size_h, img_size_w)
-
-target_train_data = np.load(target_train_data_file)
-target_train = np.array([i[0] for i in target_train_data]).reshape(-1, img_size_w, img_size_h, num_channel)
-target_train = target_train
-
-train_noise_data = np.load(train_noise_data_file)
-train_noise = np.array([i[0] for i in train_noise_data]).reshape(-1, img_size_w, img_size_h, num_channel)
-train_noise = train_noise
-
-target_val_data = np.load(target_val_data_file)
-target_val = np.array([i[0] for i in target_val_data]).reshape(-1, img_size_w, img_size_h, num_channel)
-target_val = target_val
-
-val_noise_data = np.load(val_noise_data_file)
-val_noise = np.array([i[0] for i in val_noise_data]).reshape(-1, img_size_w, img_size_h, num_channel)
-val_noise = val_noise
-
-start_time = time.time()
-model.fit({'input': train_noise}, {'target': target_train},
-          validation_set=({'input': val_noise}, {'target': target_val}),
-          n_epoch=10, batch_size=4, show_metric=True, run_id=MODEL_NAME)
-duration = time.time() - start_time
-print(duration/3600)
-
-model.save(MODEL_NAME)
