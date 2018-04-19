@@ -14,7 +14,7 @@ conv to depthwise conv(in tflearn, the depthwise conv is grouped_conv_2d),
 and add the Channel Shuffle between two depthwise conv.
 We define a new resnet_dwconv_block like below:
      
-    bn->relu->depthwiseconv->bn->relu->conv->ChannelShuffle->bn->relu->depthwiseconv->bn->relu->conv
+    bn->relu->depthwiseconv->ChannelShuffle->bn->relu->depthwiseconv->bn->relu->conv
 
 And the network basic structure is:
 
